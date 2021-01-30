@@ -1,16 +1,22 @@
 # Python Image
-FROM python:3
+FROM python:3-alphine
 
 # Prevents __pycache__/ files
 ENV PYTHONUNBUFFERED=1
 
 # Working Directory
-WORKDIR /code
+WORKDIR /app
 
 # Copy and Install Requirements
-COPY requirements.txt /code/
+COPY requirements.txt /app/
 RUN pip install -r requirements.txt
 
-# Copy Cod3e
-COPY . /code/
+# Copy Code
+COPY . /app/
 
+# Install Gunicorn
+RUN pip3 install gunicorn==20.0.4
+
+# Migrations
+RUN python3 manage.py makemigrations
+RUN python3 manage.py migrate
