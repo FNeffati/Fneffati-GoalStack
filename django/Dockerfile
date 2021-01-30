@@ -17,7 +17,3 @@ COPY . /app/
 
 # Install Gunicorn
 RUN pip3 install gunicorn==20.0.4
-
-# Migrations
-RUN python3 manage.py makemigrations
-RUN python3 manage.py migrate

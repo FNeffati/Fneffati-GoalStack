@@ -3,7 +3,7 @@ version: '3'
 services:
   web:
     build: .
-    command: gunicorn goalstack.wsgi --bind 0.0.0.0:8000
+    command: sh -c "python3 manage.py migrate && gunicorn goalstack.wsgi --bind 0.0.0.0:8000"
     volumes:
       - .:/code
     ports:
