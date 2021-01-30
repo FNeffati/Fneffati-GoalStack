@@ -3,6 +3,7 @@ FROM python:3-alphine
 
 # Prevents __pycache__/ files
 ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE 1
 
 # Working Directory
 WORKDIR /app
