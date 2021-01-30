@@ -1,7 +1,9 @@
 import React from 'react'
 
 export default () => {
+    
+    
     return (
-        <h1>This is the list</h1>
+        <h1>Stuff to do:</h1>
     )
 }

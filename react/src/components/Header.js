@@ -9,8 +9,8 @@ export default () => {
             <h1>Goal Stack</h1>
 
             <div className="loginoptions">
-                <h2 className="loginbuttons">Sign Up</h2>
-                <h2 className="loginbuttons">Log In</h2>
+                <button className="loginbuttons">Sign Up</button>
+                <button className="loginbuttons">Log In</button>
             </div>
         </div>
     )
