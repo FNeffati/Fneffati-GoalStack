@@ -1,5 +1,5 @@
 # Python Image
-FROM python:3-alphine
+FROM python:3-alpine
 
 # Prevents __pycache__/ files
 ENV PYTHONUNBUFFERED=1
