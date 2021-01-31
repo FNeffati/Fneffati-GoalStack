@@ -4,7 +4,6 @@ export default () => {
 
     const [input, setInput] = useState("");
     const [goals, setGoals] = useState([]);
-    const [time, setTime] = useState(0);
 
     const createNewGoal = (e) => {
         e.preventDefault();
@@ -36,13 +35,13 @@ export default () => {
             <h1>These are the goals</h1>
             <form onSubmit={handleSubmit}>
                 <input onChange={createNewGoal} value={input}/>
-                <button type="submit">Add task</button>
+                <button type="submit">Add Goal</button>
             </form>
 
             <div>
-                <ul>
+                <ul className="todolist">
                     {goals.map((item) => (
-                        <div>
+                        <div className="goal">
                             <li key={item.id}>{item.value}</li>
                             <button>Complete</button>
                             <button onClick={(e)=>deleteGoal(e, item.id)}>X</button>

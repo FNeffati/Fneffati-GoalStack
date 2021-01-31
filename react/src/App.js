@@ -1,9 +1,6 @@
 import './App.css';
 import GetGoal from './GetGoal.js'
 import Header from './components/Header'
-import Tasks from './components/Tasks'
-import Goals from './components/Goals'
-
 import Body from './components/Body'
 
 function App() {

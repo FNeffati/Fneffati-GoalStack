@@ -1,10 +1,12 @@
 import React, {useState} from 'react'
+import ATask from './ATask'
+import {FaClock} from 'react-icons/fa'
+import {BsFillPlayFill} from 'react-icons/bs'
 
 export default () => {
 
     const [input, setInput] = useState("");
     const [tasks, setTasks] = useState([]);
-    const [time, setTime] = useState(0);
 
     const createNewTask = (e) => {
         e.preventDefault();
@@ -31,14 +33,6 @@ export default () => {
         setTasks(tasks.filter( (item) => item.id !== id));
     }
 
-    const moreTime = (item) => {
-        item.time++;
-    }
-
-    const lessTime = (item) => {
-        item.time--;
-    }
-
     return (
         <div className="tasks">
             <h1>These are the tasks</h1>
@@ -48,19 +42,9 @@ export default () => {
             </form>
 
             <div>
-                <ul>
+                <ul className="todolist">
                     {tasks.map((item) => (
-                        <div className="task">
-                            <li key={item.id}>{item.value}</li>
-                            <button onClick={(e)=>deleteTask(e, item.id)}>X</button>
-
-                            <label>Timer</label>
-                            <button onClick={moreTime(item)}>+</button>
-                            <label>0</label>
-                            <button onClick={lessTime(item)}>-</button>
-
-                            <button>Complete</button>
-                        </div>
+                        <ATask item={item} deleteTask={deleteTask}/>
                     ) )}
                 </ul>
             </div>
