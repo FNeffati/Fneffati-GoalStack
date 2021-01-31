@@ -14,10 +14,10 @@ export default () => {
     const handleSubmit = (e, item) => {
         e.preventDefault();
        
-
         const newTask = {
             id: Date.now(),
             value: input,
+            time: 0,
         }
         
         setTasks([newTask, ...tasks]);
@@ -29,6 +29,14 @@ export default () => {
     const deleteTask = (e, id) => {
         e.preventDefault();
         setTasks(tasks.filter( (item) => item.id !== id));
+    }
+
+    const moreTime = (item) => {
+        item.time++;
+    }
+
+    const lessTime = (item) => {
+        item.time--;
     }
 
     return (
@@ -44,12 +52,12 @@ export default () => {
                     {tasks.map((item) => (
                         <div className="task">
                             <li key={item.id}>{item.value}</li>
-                            <button>X</button>
+                            <button onClick={(e)=>deleteTask(e, item.id)}>X</button>
 
                             <label>Timer</label>
-                            <button>+</button>
-                            <label>{time}</label>
-                            <button>-</button>
+                            <button onClick={moreTime(item)}>+</button>
+                            <label>0</label>
+                            <button onClick={lessTime(item)}>-</button>
 
                             <button>Complete</button>
                         </div>
