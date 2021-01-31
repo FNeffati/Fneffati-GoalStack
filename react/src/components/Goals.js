@@ -1,9 +1,19 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
 
 export default () => {
 
     const [input, setInput] = useState("");
     const [goals, setGoals] = useState([]);
+
+    useEffect(() => {
+        getGoals();
+    }, []);
+
+    const getGoals = async () => {
+        const goals = await fetch("http://hoyahacks.dylantknguyen.com/api/goals/list/")
+        .then(response => response.json())
+        .then(data => setGoals(data));
+    };
 
     const createNewGoal = (e) => {
         e.preventDefault();
@@ -25,9 +35,15 @@ export default () => {
         console.log(...goals);
     }
 
-    const deleteGoal = (e, id) => {
-        e.preventDefault();
-        setGoals(goals.filter( (item) => item.id !== id));
+    const deleteGoal = async (e, id) => {
+        await fetch(`http://hoyahacks.dylantknguyen.com/api/goals/delete/${id}/`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        })
+        .then(response => console.log(response))
+        setGoals(goals.filter((item) => item.id !== id));
     }
 
     return (
@@ -39,14 +55,21 @@ export default () => {
             </form>
 
             <div>
-                <ul className="todolist">
+                <ul>
+                    {goals.map((goal) => (
+                      <>
+                            <li key={goal.id}>{goal.name}</li>
+                            <button>Complete</button>
+                            <button onClick={(e)=>deleteGoal(e, goal.id)}>X</button>
+                      </>
+                    ))}
                     {goals.map((item) => (
-                        <div className="goal">
+                      <>
                             <li key={item.id}>{item.value}</li>
                             <button>Complete</button>
                             <button onClick={(e)=>deleteGoal(e, item.id)}>X</button>
-                        </div>
-                    ) )}
+                      </>
+                    ))}
                 </ul>
             </div>
         </div>
