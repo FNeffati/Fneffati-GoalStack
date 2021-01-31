@@ -36,9 +36,15 @@ export default () => {
         console.log(...goals);
     }
 
-    const deleteGoal = (e, id) => {
-        e.preventDefault();
-        setGoals(goals.filter( (item) => item.id !== id));
+    const deleteGoal = async (e, id) => {
+        await fetch(`http://hoyahacks.dylantknguyen.com/api/goals/delete/${id}/`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        })
+        .then(response => console.log(response))
+        setGoals(goals.filter((item) => item.id !== id));
     }
 
     return (
